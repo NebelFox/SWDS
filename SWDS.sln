@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop", "Shop\Shop.csproj", "{FA22C1E2-4176-4EB3-BF5D-7998675BA91F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicSquare", "MagicSquare\MagicSquare.csproj", "{B75F57C2-FBB0-4D5C-BB0A-98090D54A8E8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA22C1E2-4176-4EB3-BF5D-7998675BA91F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA22C1E2-4176-4EB3-BF5D-7998675BA91F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA22C1E2-4176-4EB3-BF5D-7998675BA91F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA22C1E2-4176-4EB3-BF5D-7998675BA91F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B75F57C2-FBB0-4D5C-BB0A-98090D54A8E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B75F57C2-FBB0-4D5C-BB0A-98090D54A8E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B75F57C2-FBB0-4D5C-BB0A-98090D54A8E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B75F57C2-FBB0-4D5C-BB0A-98090D54A8E8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
