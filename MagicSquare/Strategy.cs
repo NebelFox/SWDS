@@ -2,7 +2,7 @@
 {
     public enum Strategy
     {
-        UP_RIGHT = -1,
-        DOWN_RIGHT = 1
+        UpRight = -1,
+        DownRight = 1
     }
 }

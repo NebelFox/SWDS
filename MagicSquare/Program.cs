@@ -24,8 +24,9 @@ namespace MagicSquare
                 if (TryParse(tokens[0], out int size))
                 {
                     if (tokens.Length > 1
-                        && Enum.TryParse(tokens[1].ToUpper()
-                                                       .Replace('-', '_'), 
+                        && Enum.TryParse(tokens[1]
+                                        .ToUpper()
+                                        .Replace('-', '_'),
                                          out Strategy strategy))
                         Generate(size, strategy);
                     Console.WriteLine(

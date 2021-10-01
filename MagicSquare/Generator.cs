@@ -4,7 +4,7 @@ namespace MagicSquare
 {
     public static class Generator
     {
-        public static int[,] Generate(int size, Strategy strategy = Strategy.DOWN_RIGHT)
+        public static int[,] Generate(int size, Strategy strategy = Strategy.DownRight)
         {
             if (size < 0 || size % 2 == 0)
                 throw new ArgumentException("Only positive odd size is supported", nameof(size));
