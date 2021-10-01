@@ -2,7 +2,7 @@
 {
     public enum ProductKind
     {
-        MEAT,
-        DAIRY
+        Meat,
+        Dairy
     }
 }

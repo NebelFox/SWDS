@@ -16,7 +16,7 @@ namespace Task.Interactors
         {
             ProductFactories
                 = new Dictionary<ProductKind, Func<string[], Product>>();
-            RegisterFactory(ProductKind.MEAT,
+            RegisterFactory(ProductKind.Meat,
                             options =>
                             {
                                 // category kind name price weight
@@ -34,7 +34,7 @@ namespace Task.Interactors
                                                 category,
                                                 meatKind);
                             });
-            RegisterFactory(ProductKind.DAIRY,
+            RegisterFactory(ProductKind.Dairy,
                             options =>
                             {
                                 // name, price, weight, days-to-expire
@@ -70,14 +70,14 @@ namespace Task.Interactors
 
         private static (string, float, double) ParseProductOptions(IReadOnlyList<string> options)
         {
-            Console.WriteLine("Options: ");
+            /*Console.WriteLine("Options: ");
             foreach (string option in options)
             {
                 Console.Write(option);
                 Console.Write(", ");
             }
 
-            Console.Write('\n');
+            Console.Write('\n');*/
             return (options[0],
                     NumUtils.ParseFloat(options[1]),
                     NumUtils.ParseDouble(options[2]));

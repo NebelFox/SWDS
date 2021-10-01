@@ -2,9 +2,9 @@
 {
     public enum MeatKind
     {
-        MUTTON,
-        VEAL,
-        PORK,
-        CHICKEN
+        Mutton,
+        Veal,
+        Pork,
+        Chicken
     }
 }

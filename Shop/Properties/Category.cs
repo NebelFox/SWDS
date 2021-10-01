@@ -2,8 +2,8 @@
 {
     public enum Category
     {
-        PREMIUM,
-        FIRST_GRADE,
-        SECOND_GRADE
+        Premium,
+        First_Grade,
+        Second_Grade
     }
 }
