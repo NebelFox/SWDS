@@ -12,25 +12,38 @@ namespace MagicSquare
 
         private static void StartDialog()
         {
-            Console.WriteLine("Input format: 'size [up-right|down-right]'");
+            const Strategy defaultStrategy = Strategy.DownRight;
+            Console.WriteLine("Input format: 'size strategy'");
+            Console.WriteLine($"strategy: {string.Join('|', Enum.GetNames<Strategy>())}, {defaultStrategy.ToString()} by default");
             Console.WriteLine("'exit' to terminate the program");
             while (true)
             {
                 Console.WriteLine("");
                 string input = Console.ReadLine();
+                
                 if (input == "exit")
+                {
+                    Console.WriteLine("Terminating the program");
                     break;
-                string[] tokens = input.Split();
+                }
+                
+                string[] tokens = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
                 if (TryParse(tokens[0], out int size))
                 {
-                    if (tokens.Length > 1
-                        && Enum.TryParse(tokens[1]
-                                        .ToUpper()
-                                        .Replace('-', '_'),
-                                         out Strategy strategy))
-                        Generate(size, strategy);
-                    Console.WriteLine(
-                        $"Please use any of {string.Join(", ", Enum.GetNames<Strategy>())}");
+                    if (tokens.Length > 1)
+                    {
+                        if(Enum.TryParse(tokens[1], out Strategy strategy))
+                            Generate(size, strategy);
+                        else
+                        {
+                            Console.WriteLine(
+                                $"Invalid strategy. Use any of {{{string.Join(", ", Enum.GetNames<Strategy>())}}}");
+                        }
+                    }
+                    else
+                    {
+                        Generate(size, defaultStrategy);
+                    }
                 }
                 else
                 {
