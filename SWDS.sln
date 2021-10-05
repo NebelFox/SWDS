@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicSquare", "MagicSquare\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EleTracker", "EleTracker\EleTracker.csproj", "{D8ED9088-4466-4C32-9B87-100B477ABED5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polynomials", "Polynomials\Polynomials.csproj", "{4EC641AB-FA9E-49EB-9DFC-919F0FA926E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shadows", "Shadows\Shadows.csproj", "{707042C2-D30B-417F-BE97-E287D5084C3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,13 @@ Global
 		{D8ED9088-4466-4C32-9B87-100B477ABED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8ED9088-4466-4C32-9B87-100B477ABED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8ED9088-4466-4C32-9B87-100B477ABED5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EC641AB-FA9E-49EB-9DFC-919F0FA926E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EC641AB-FA9E-49EB-9DFC-919F0FA926E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EC641AB-FA9E-49EB-9DFC-919F0FA926E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EC641AB-FA9E-49EB-9DFC-919F0FA926E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{707042C2-D30B-417F-BE97-E287D5084C3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{707042C2-D30B-417F-BE97-E287D5084C3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{707042C2-D30B-417F-BE97-E287D5084C3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{707042C2-D30B-417F-BE97-E287D5084C3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
