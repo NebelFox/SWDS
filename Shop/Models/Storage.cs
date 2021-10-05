@@ -2,22 +2,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Shop.Interactors;
+using Shop.Models.Products;
 
-namespace Task.Models
+namespace Shop.Models
 {
     public class Storage : IEnumerable<Product>
     {
         private readonly List<Product> _products;
+        private DateTime _today;
+        private readonly ExpiresReporter _reporter;
 
-        public Storage() : this(0)
-        { }
-
-        public Storage(int initialCapacity)
+        private Storage(DateTime today, ExpiresReporter reporter)
         {
-            _products = new List<Product>(initialCapacity);
+            _today = today;
+            _reporter = reporter;
         }
 
-        public Storage(IEnumerable<Product> products)
+        public Storage(DateTime today, 
+                       ExpiresReporter reporter, 
+                       int capacity = 0) : this(today, reporter)
+        {
+            _products = new List<Product>(capacity);
+        }
+
+        public Storage(DateTime today, 
+                       ExpiresReporter reporter, 
+                       IEnumerable<Product> products) : this(today, reporter)
         {
             _products = new List<Product>(products);
         }
@@ -70,6 +81,23 @@ namespace Task.Models
         {
             foreach (Product product in _products)
                 product.ChangePrice(percents);
+        }
+
+        public void DailyUpdate()
+        {
+            _today = _today.AddDays(1);
+            ReportExpired();
+            RemoveExpired();
+        }
+
+        private void ReportExpired()
+        {
+            _reporter.Report(_today, _products.Where(p => p.IsExpired(_today)));
+        }
+        
+        private void RemoveExpired()
+        {
+            _products.RemoveAll(p => p.IsExpired(_today));
         }
     }
 }

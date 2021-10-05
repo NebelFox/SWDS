@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Shop.Interactors;
+using Shop.Models;
 using Task.Data;
-using Task.Models;
 
 namespace Task.Interactors
 {

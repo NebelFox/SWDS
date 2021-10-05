@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Task.Views
+namespace Shop.Utils
 {
     public static class StringUtils
     {

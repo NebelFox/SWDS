@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Task.Models
+namespace Shop.Models
 {
     public class Check
     {

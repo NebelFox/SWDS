@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Task.Utils
+namespace Shop.Utils
 {
     public static class NumUtils
     {

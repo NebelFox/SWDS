@@ -1,27 +1,39 @@
 ﻿using System;
-using Task.Utils;
+using Shop.Utils;
 
-namespace Task.Models
+namespace Shop.Models
 {
     public class Product
     {
-        protected float _price;
-        protected double _weight;
+        private const string DefaultName = "Unknown";
+        private const float DefaultPrice = 0f;
+        private const double DefaultWeight = 0f;
+        private const uint DefaultDaysToExpire = 7u;
+
+        private float _price;
+        private readonly double _weight;
+        private readonly DateTime _dateCreated;
+        private readonly uint _daysToExpire;
 
         public Product()
         {
-            Name = string.Empty;
-            Price = 0;
-            Weight = 0;
+            Name = DefaultName;
+            Price = DefaultPrice;
+            Weight = DefaultWeight;
+            _daysToExpire = DefaultDaysToExpire;
         }
 
         public Product(string name,
-                       float price,
-                       double weight)
+                          float price,
+                          double weight,
+                          DateTime dateCreated,
+                          uint daysToExpire)
         {
             Name = name;
             Price = price;
             Weight = weight;
+            _dateCreated = dateCreated;
+            _daysToExpire = daysToExpire;
         }
 
         public string Name { get; }
@@ -42,7 +54,7 @@ namespace Task.Models
         public double Weight
         {
             get => _weight;
-            protected set
+            protected init
             {
                 if (value < 0)
                     throw new ArgumentOutOfRangeException(nameof(Weight),
@@ -50,6 +62,11 @@ namespace Task.Models
                                                           "Weight can't be negative");
                 _weight = value;
             }
+        }
+
+        public bool IsExpired(DateTime now)
+        {
+            return now.Subtract(_dateCreated).Days > _daysToExpire;
         }
 
         public virtual void ChangePrice(int percents)
@@ -63,9 +80,10 @@ namespace Task.Models
                 return false;
 
             var product = (Product)another;
+
             return Name == product.Name
-                   && Price == product.Price
-                   && Weight == product.Weight;
+                && Price == product.Price
+                && Weight == product.Weight;
         }
 
         public override int GetHashCode()

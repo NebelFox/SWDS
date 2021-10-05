@@ -1,18 +1,41 @@
 ﻿using System;
+using Shop.Interactors;
+using Shop.Models;
 using Task.Interactors;
-using Task.Models;
 
-namespace Task
+namespace Shop
 {
     internal class Program
     {
         private static void Main(string[] args)
         {
-            var storage = new Storage();
+            Console.WriteLine("Enter a file to write reports about expired products to:");
+            string filepath = Console.ReadLine();
+            var reporter = new ExpiresReporter(filepath);
+
+            Console.WriteLine("Enter the starting date for the storage:");
+            var today = DateTime.Parse(Console.ReadLine());
+
+            var storage = new Storage(today, reporter);
             storage.Add(ProductCreationPrompter.StartDialog());
 
             storage.View();
+            
+            Check check = GenerateRandomCheck(storage);
 
+            if (check is not null)
+            {
+                Console.WriteLine("Randomly generated check:");
+                            check.View();
+            }
+            else
+            {
+                Console.WriteLine("Failed to generate a random check as the storage is empty");
+            }
+        }
+
+        private static Check GenerateRandomCheck(Storage storage)
+        {
             int storageProductsCount = storage.Count;
 
             if (storageProductsCount > 0)
@@ -20,17 +43,15 @@ namespace Task
                 var random = new Random();
                 var buys = new Buy[10];
                 for (var i = 0; i < 10; ++i)
+                {
                     buys[i] = new Buy(storage[random.Next(storageProductsCount)],
                                       random.Next(1, 12));
+                }
 
-                var check = new Check(buys);
-                Console.WriteLine("Randomly generated check:");
-                check.View();
+                return new Check(buys);
             }
-            else
-            {
-                Console.WriteLine("Failed to generate a random check as the storage is empty");
-            }
+
+            return null;
         }
     }
 }

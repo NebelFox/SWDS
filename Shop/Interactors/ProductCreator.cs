@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Shop.Models;
+using Shop.Models.Products;
+using Shop.Utils;
 using Task.Data;
-using Task.Models;
-using Task.Utils;
 
-namespace Task.Interactors
+namespace Shop.Interactors
 {
     public static class ProductCreator
     {
@@ -16,36 +17,41 @@ namespace Task.Interactors
         {
             ProductFactories
                 = new Dictionary<ProductKind, Func<string[], Product>>();
+            RegisterFactory(ProductKind.Product,
+                            options =>
+                            {
+                                (string name, 
+                                 float price, 
+                                 double weight, 
+                                 DateTime dateCreated, 
+                                 uint daysToExpire) = ParseProductOptions(options);
+
+                                return new Product(name, price, weight, dateCreated, daysToExpire);
+                            });
             RegisterFactory(ProductKind.Meat,
                             options =>
                             {
                                 // category kind name price weight
-                                Enum.TryParse(options[0].Replace('-', '_'),
+                                Enum.TryParse(options[0],
                                               true,
                                               out Category category);
-                                Enum.TryParse(options[1].Replace('-', '_'),
+                                Enum.TryParse(options[1],
                                               true,
                                               out MeatKind meatKind);
-                                (string name, float price, double weight)
-                                    = ParseProductOptions(options[2..]);
+                                (string name, 
+                                 float price, 
+                                 double weight, 
+                                 DateTime dateCreated, 
+                                 uint daysToExpire) = ParseProductOptions(options[2..]);
+
                                 return new Meat(name,
                                                 price,
                                                 weight,
+                                                dateCreated,
+                                                daysToExpire,
                                                 category,
                                                 meatKind);
                             });
-            RegisterFactory(ProductKind.Dairy,
-                            options =>
-                            {
-                                // name, price, weight, days-to-expire
-                                (string name, float price, double weight)
-                                    = ParseProductOptions(options);
-                                return new Dairy(name,
-                                                 price,
-                                                 weight,
-                                                 int.Parse(options[3]));
-                            });
-            ;
         }
 
         public static void RegisterFactory(ProductKind productKind,
@@ -68,19 +74,16 @@ namespace Task.Interactors
             return ProductFactories[productKind](options[1..]);
         }
 
-        private static (string, float, double) ParseProductOptions(IReadOnlyList<string> options)
+        private static (string, float, double, DateTime, uint) ParseProductOptions(IReadOnlyList<string> options)
         {
-            /*Console.WriteLine("Options: ");
-            foreach (string option in options)
-            {
-                Console.Write(option);
-                Console.Write(", ");
-            }
+            if (!DateTime.TryParse(options[3], out DateTime dateCreated))
+                throw new ArgumentException($"Invalid DateTime format: {options[3]}");
 
-            Console.Write('\n');*/
             return (options[0],
                     NumUtils.ParseFloat(options[1]),
-                    NumUtils.ParseDouble(options[2]));
+                    NumUtils.ParseDouble(options[2]),
+                    dateCreated,
+                    uint.Parse(options[4]));
         }
     }
 }
