@@ -26,7 +26,7 @@ namespace Shop
             if (check is not null)
             {
                 Console.WriteLine("Randomly generated check:");
-                            check.View();
+                Console.WriteLine(check);
             }
             else
             {
