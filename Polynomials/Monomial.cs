@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Polynomials
 {
-    public record Monom(double Multiplier, uint Power)
+    public record Monomial(double Multiplier, uint Power)
     {
         public override string ToString()
         {

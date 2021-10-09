@@ -6,25 +6,25 @@ namespace Polynomials
 {
     public class Polynomial
     {
-        private readonly LinkedList<Monom> _content;
+        private readonly LinkedList<Monomial> _content;
 
         public Polynomial()
         {
-            _content = new LinkedList<Monom>();
+            _content = new LinkedList<Monomial>();
         }
 
-        private Polynomial(IEnumerable<Monom> monoms)
+        private Polynomial(IEnumerable<Monomial> monomials)
         {
-            _content = new LinkedList<Monom>(monoms.OrderByDescending(m => m.Power));
+            _content = new LinkedList<Monomial>(monomials.OrderByDescending(m => m.Power));
             GroupUp();
             Purify();
         }
 
-        public Polynomial(IEnumerable<(double, uint)> monoms)
-            : this(monoms.Select(m => new Monom(m.Item1, m.Item2)))
+        public Polynomial(IEnumerable<(double, uint)> monomials)
+            : this(monomials.Select(m => new Monomial(m.Item1, m.Item2)))
         { }
 
-        public Polynomial(params (double, uint)[] monoms) : this(monoms.AsEnumerable())
+        public Polynomial(params (double, uint)[] monomials) : this(monomials.AsEnumerable())
         { }
 
         public uint Degree => _content.First?.Value.Power ?? 0;
@@ -37,7 +37,7 @@ namespace Polynomials
         {
             set
             {
-                if (TryGetByPower(power, out LinkedListNode<Monom> node))
+                if (TryGetByPower(power, out LinkedListNode<Monomial> node))
                 {
                     if(value != 0)
                         node.Value = node.Value with { Multiplier = value };
@@ -47,14 +47,14 @@ namespace Polynomials
                 else if (value != 0)
                 {
                     if (node == null)
-                        _content.AddFirst(new Monom(value, power));
+                        _content.AddFirst(new Monomial(value, power));
                     else
-                        _content.AddBefore(node, new Monom(value, power));
+                        _content.AddBefore(node, new Monomial(value, power));
                 }
             }
         }
 
-        private bool TryGetByPower(uint power, out LinkedListNode<Monom> node)
+        private bool TryGetByPower(uint power, out LinkedListNode<Monomial> node)
         {
             node = _content.First;
             if (node == null)
@@ -70,9 +70,19 @@ namespace Polynomials
             return Merge(another);
         }
 
+        public static Polynomial operator +(Polynomial lhs, Polynomial rhs)
+        {
+            return lhs.Add(rhs);
+        }
+
         public Polynomial Subtract(Polynomial another)
         {
             return Add(another.Multiply(-1f));
+        }
+        
+        public static Polynomial operator -(Polynomial lhs, Polynomial rhs)
+        {
+            return lhs.Subtract(rhs);
         }
 
         public Polynomial Multiply(double multiplier)
@@ -80,12 +90,22 @@ namespace Polynomials
             return new Polynomial(
                 _content.Select(m => m with { Multiplier = m.Multiplier * multiplier }));
         }
-
-        public Polynomial Multiply(Monom multiplier)
+        
+        public static Polynomial operator *(Polynomial lhs, double rhs)
         {
-            return new Polynomial(_content.Select(m => new Monom(
+            return lhs.Multiply(rhs);
+        }
+
+        public Polynomial Multiply(Monomial multiplier)
+        {
+            return new Polynomial(_content.Select(m => new Monomial(
                                                       m.Multiplier * multiplier.Multiplier,
                                                       m.Power + multiplier.Power)));
+        }
+        
+        public static Polynomial operator *(Polynomial lhs, Monomial rhs)
+        {
+            return lhs.Multiply(rhs);
         }
 
         public Polynomial Multiply(Polynomial multiplier)
@@ -99,10 +119,20 @@ namespace Polynomials
 
             return new Polynomial(_content.SelectMany(m => multiplier.Multiply(m)._content));
         }
+        
+        public static Polynomial operator *(Polynomial lhs, Polynomial rhs)
+        {
+            return lhs.Multiply(rhs);
+        }
 
         public Polynomial Divide(double divisor)
         {
             return Multiply(1f / divisor);
+        }
+
+        public static implicit operator Polynomial(double x)
+        {
+            return new Polynomial((x, 0));
         }
         
         private Polynomial Merge(Polynomial another)
@@ -116,7 +146,7 @@ namespace Polynomials
             if (Count < 1)
                 return;
 
-            LinkedListNode<Monom> node = _content.First;
+            LinkedListNode<Monomial> node = _content.First;
             while (node != null)
             {
                 if (node.Next != null && node.Value.Power == node.Next.Value.Power)
@@ -137,12 +167,12 @@ namespace Polynomials
             if (Count == 0)
                 return;
 
-            LinkedListNode<Monom> node = _content.First;
+            LinkedListNode<Monomial> node = _content.First;
             while (node != null)
             {
                 if (node.Value.Multiplier == 0f)
                 {
-                    LinkedListNode<Monom> next = node.Next;
+                    LinkedListNode<Monomial> next = node.Next;
                     _content.Remove(node);
                     node = next;
                 }
@@ -176,9 +206,8 @@ namespace Polynomials
 
         public static Polynomial Parse(string pattern)
         {
-            Console.WriteLine($"// Started parsing [{pattern}]");
             // ReSharper disable once IdentifierTypo
-            var monoms = new LinkedList<Monom>();
+            var monoms = new LinkedList<Monomial>();
 
             pattern = pattern.EraseWhitespaces();
             if (pattern[0] != '-' && pattern[0] != '+')
@@ -235,10 +264,9 @@ namespace Polynomials
                     }
                 }
 
-                monoms.AddLast(new Monom(multiplier, power));
+                monoms.AddLast(new Monomial(multiplier, power));
             }
 
-            Console.WriteLine($"// Completed parsing [{pattern}]");
             return new Polynomial(monoms);
         }
     }
