@@ -10,20 +10,20 @@ namespace Shadows
         TopBottom
     }
 
-    public static class Shader
+    public static class Projector
     {
         public static bool[,] Shade(bool[,,] shape, Prospect prospect)
         {
             return prospect switch
             {
                 Prospect.FrontRear => ShadeFrontRear(shape),
-                
+
                 Prospect.LeftRight => ShadeLeftRight(shape),
-                
+
                 Prospect.TopBottom => ShadeTopBottom(shape),
-                
-                _ => throw new InvalidEnumArgumentException(nameof(prospect), 
-                                                            (int)prospect, 
+
+                _ => throw new InvalidEnumArgumentException(nameof(prospect),
+                                                            (int)prospect,
                                                             typeof(Prospect))
             };
         }
@@ -34,23 +34,16 @@ namespace Shadows
             int width = shape.GetLength(1);
             int depth = shape.GetLength(2);
 
-            var shade = new bool[height, width];
+            var projection = new bool[height, width];
 
-            for (int i = height * width - 1; i > -1; --i)
+            for (var i = 0; i < height; ++i)
+            for (var j = 0; j < width; ++j)
             {
-                shade[i / height, i % height]
-                    = Enumerable.Range(0, depth)
-                                .Any(k => shape[i / height, i % height, k]);
+                projection[i, j] = Enumerable.Range(0, depth)
+                                                     .Any(k => shape[i, j, k]);
             }
 
-            return shade;
-            /*for (var i = 0; i < height; ++i)
-            {
-                for (var j = 0; j < width; ++j)
-                {
-                    shade[i, j] = Enumerable.Range(0, depth).Any(k => shape[i, j, k]);
-                }
-            }*/
+            return projection;
         }
 
         public static bool[,] ShadeLeftRight(bool[,,] shape)
@@ -61,11 +54,11 @@ namespace Shadows
 
             var shade = new bool[height, depth];
 
-            for (int i = height * depth - 1; i > -1; --i)
+            for (var i = 0; i < height; ++i)
+            for (var j = 0; j < depth; ++j)
             {
-                shade[i / height, i % height]
-                    = Enumerable.Range(0, width)
-                                .Any(k => shape[i / height, k, i % height]);
+                shade[i, j] = Enumerable.Range(0, width)
+                                        .Any(k => shape[i, k, j]);
             }
 
             return shade;
@@ -79,11 +72,11 @@ namespace Shadows
 
             var shade = new bool[width, depth];
 
-            for (int i = width * depth - 1; i > -1; --i)
+            for (var i = 0; i < depth; ++i)
+            for (var j = 0; j < width; ++j)
             {
-                shade[i / width, i % width]
-                    = Enumerable.Range(0, height)
-                                .Any(k => shape[k, i % width, i / width]);
+                shade[i, j] = Enumerable.Range(0, height)
+                                        .Any(k => shape[k, j, i]);
             }
 
             return shade;

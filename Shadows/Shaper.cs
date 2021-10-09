@@ -2,24 +2,8 @@
 
 namespace Shadows
 {
-    public static class Shaper
+    public class Shaper
     {
-        /*public static bool[,,] FromInts(int[,,] source, Func<int, >)
-        {
-            int height = source.GetLength(0);
-            int width = source.GetLength(1);
-            int depth = source.GetLength(2);
-
-            var shape = new bool[height, width, depth];
-
-            for (int i = height; i > 0; --i)
-            for (int j = width; j > 0; --j)
-            for (int k = depth; k > 0; --k)
-                shape[i, j, k] = source[i, j, k] == 1;
-
-            return shape;
-        }*/
-        
         public static bool[,,] FromStrings(string[,] source, Func<char, bool> predicate)
         {
             int height = source.GetLength(0);
@@ -28,6 +12,7 @@ namespace Shadows
             
             var shape = new bool[height, width, depth];
             
+            // mapping
             // depth -> width
             // width -> height
             // height -> depth

@@ -7,18 +7,49 @@ namespace Shadows
     {
         static void Main(string[] args)
         {
-            var renderer = new Renderer(' ', 'x', '-');
+            var renderer = new Renderer(' ', '#', ' ');
             // 5x5x5
             // '*' - true
             // ' ' - false
             var origin = new string[,]
             {
-                { "     ", " * * ", "     ", " * * ", "     " },
-                { "     ", " * * ", "     ", " * * ", "     " },
-                { "     ", " * * ", "  *  ", " * * ", "     " },
-                { "     ", " * * ", "     ", " * * ", "     " },
-                { "     ", " * * ", "     ", " * * ", "     " }
+                {
+                    "     ", 
+                    " * * ", 
+                    "    *", 
+                    " * * ", 
+                    "     "
+                },
+                {
+                    "     ", 
+                    " * * ", 
+                    "     ", 
+                    " * * ", 
+                    "     "
+                },
+                {
+                    "     ", 
+                    " * * ", 
+                    "  *  ", 
+                    " * * ", 
+                    "     "
+                },
+                {
+                    "     ", 
+                    " * * ", 
+                    "     ", 
+                    " * * ", 
+                    "     "
+                },
+                {
+                    "     ", 
+                    " * * ", 
+                    "*    ", 
+                    " * * ", 
+                    "     "
+                }
             };
+            
             bool[,,] shape = Shaper.FromStrings(origin, c => c == '*');
 
             for (var i = 0; i < 5; ++i)
@@ -27,9 +58,8 @@ namespace Shadows
             foreach (Prospect prospect in Enum.GetValues<Prospect>())
             {
                 Console.WriteLine($"Prospect: {prospect}");
-                bool[,] shade = Shader.Shade(shape, prospect);
+                bool[,] shade = Projector.Shade(shape, prospect);
                 Console.WriteLine(renderer.Render(shade));
-                Console.WriteLine();
             }
         }
     }
