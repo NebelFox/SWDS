@@ -16,6 +16,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteVisits", "SiteVisits\Si
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackwardEnumeratedMatrix", "BackwardEnumeratedMatrix\BackwardEnumeratedMatrix.csproj", "{F0F393AE-6A9C-40E8-B935-E92083EE62F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dishes", "Dishes\Dishes.csproj", "{8BF2DB67-C82B-4621-8DE7-D1D0E1CDF765}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translate", "Translate\Translate.csproj", "{53414A9C-5EF3-466E-B704-FAC021264C32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +58,13 @@ Global
 		{F0F393AE-6A9C-40E8-B935-E92083EE62F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0F393AE-6A9C-40E8-B935-E92083EE62F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0F393AE-6A9C-40E8-B935-E92083EE62F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BF2DB67-C82B-4621-8DE7-D1D0E1CDF765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BF2DB67-C82B-4621-8DE7-D1D0E1CDF765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BF2DB67-C82B-4621-8DE7-D1D0E1CDF765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BF2DB67-C82B-4621-8DE7-D1D0E1CDF765}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53414A9C-5EF3-466E-B704-FAC021264C32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53414A9C-5EF3-466E-B704-FAC021264C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53414A9C-5EF3-466E-B704-FAC021264C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53414A9C-5EF3-466E-B704-FAC021264C32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
