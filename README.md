@@ -1,7 +1,7 @@
 # SWDS
 Software Development School Repository.  
 For each task a separate project is created.  
-Each project root folder contains README.md with the task number(s) it's for.
+Each project root folder contains README.md with number and description of the tast it's for.
 
 ### Navigation:
 - Task 1 - [Shop](https://github.com/NebelFox/SWDS/tree/master/Shop)
@@ -18,3 +18,6 @@ Each project root folder contains README.md with the task number(s) it's for.
   - 6.1 - [Polynomials](https://github.com/NebelFox/SWDS/tree/master/Polynomials)
   - 6.2 - [SiteVisits](https://github.com/NebelFox/SWDS/tree/master/SiteVisits)
   - 6.3 - [BackwardEnumeratedMatrix](https://github.com/NebelFox/SWDS/tree/master/BackwardEnumeratedMatrix)
+- Task 7:
+  - 7.1 - [Translate](https://github.com/NebelFox/SWDS/tree/master/Translate)
+  - 7.1 - [Dishes](https://github.com/NebelFox/SWDS/tree/master/Dishes)
