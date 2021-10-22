@@ -2,6 +2,7 @@
 using System.Linq;
 using Shop.Interactors;
 using Shop.Models;
+using Shop.Utils;
 using Sort;
 using Task.Interactors;
 
@@ -10,6 +11,30 @@ namespace Shop
     internal class Program
     {
         private static void Main(string[] args)
+        {
+            StorageMatcherDemo();
+        }
+
+        private static void StorageMatcherDemo()
+        {
+            Storage lhs = CreateStorage();
+            Storage rhs = CreateStorage();
+
+            Console.WriteLine("Common products:");
+            foreach (Product product in StorageMatcher.IntersectProducts(lhs, rhs))
+                Console.WriteLine(product);
+            
+            Console.WriteLine("\nProducts in the first, but not in the second:");
+            foreach (Product product in StorageMatcher.Except(lhs, rhs))
+                Console.WriteLine(product);
+            
+            Console.WriteLine("\nDifferent products:");
+            foreach (Product product in StorageMatcher.SymmetricExcept(lhs, rhs))
+                Console.WriteLine(product);
+            
+        }
+
+        private static void SortingDemo()
         {
             Storage storage = CreateStorage();
 
