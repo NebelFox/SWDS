@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using Shop.Interactors;
 using Shop.Models;
+using Sort;
 using Task.Interactors;
 
 namespace Shop
@@ -8,6 +10,23 @@ namespace Shop
     internal class Program
     {
         private static void Main(string[] args)
+        {
+            Storage storage = CreateStorage();
+
+            PrintStorageSorted(storage,
+                               (lhs, rhs) => lhs.Price.CompareTo(rhs.Price),
+                               "price");
+
+            PrintStorageSorted(storage,
+                               (lhs, rhs) => lhs.Name.CompareTo(rhs.Name),
+                               "price");
+
+            PrintStorageSorted(storage,
+                               (lhs, rhs) => lhs.Weight.CompareTo(rhs.Weight),
+                               "weight");
+        }
+
+        private static Storage CreateStorage()
         {
             Console.WriteLine("Enter a file to write reports about expired products to:");
             string filepath = Console.ReadLine();
@@ -19,8 +38,23 @@ namespace Shop
             var storage = new Storage(today, reporter);
             storage.Add(ProductCreationPrompter.StartDialog());
 
-            storage.View();
-            
+            return storage;
+        }
+
+        private static void PrintStorageSorted(Storage storage,
+                                               Sorter.Compare<Product> compare,
+                                               string by)
+        {
+            Product[] products = storage.ToArray();
+            Sorter.Sort(products, compare);
+            Console.WriteLine($"Products, sorted by {by}:");
+            foreach (Product product in products)
+                Console.WriteLine(product);
+            Console.WriteLine();
+        }
+
+        private static void CheckDemo(Storage storage)
+        {
             Check check = GenerateRandomCheck(storage);
 
             if (check is not null)
