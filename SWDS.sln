@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dishes", "Dishes\Dishes.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translate", "Translate\Translate.csproj", "{53414A9C-5EF3-466E-B704-FAC021264C32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BracketsDepth", "BracketsDepth\BracketsDepth.csproj", "{ED30FF5F-F91E-4FAC-AAA5-2D30D303E6BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,5 +68,9 @@ Global
 		{53414A9C-5EF3-466E-B704-FAC021264C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53414A9C-5EF3-466E-B704-FAC021264C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53414A9C-5EF3-466E-B704-FAC021264C32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED30FF5F-F91E-4FAC-AAA5-2D30D303E6BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED30FF5F-F91E-4FAC-AAA5-2D30D303E6BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED30FF5F-F91E-4FAC-AAA5-2D30D303E6BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED30FF5F-F91E-4FAC-AAA5-2D30D303E6BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
