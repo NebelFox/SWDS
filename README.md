@@ -4,6 +4,7 @@ For each task a separate project is created.
 Each project root folder contains README.md with number and description of the tast it's for.
 
 ### Navigation:
+- Task 9: [Shop](https://github.com/NebelFox/SWDS/tree/master/Shop) ([commit](https://github.com/NebelFox/SWDS/commit/9e11d17e178e01fd6e2cf6ab27b77e84425304aa))
 - Task 8:
   - 8.1 - [Shop](https://github.com/NebelFox/SWDS/tree/master/Shop)
   - 8.2 - [Shop](https://github.com/NebelFox/SWDS/tree/master/Shop)
