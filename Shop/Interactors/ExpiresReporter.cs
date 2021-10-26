@@ -15,23 +15,10 @@ namespace Shop.Interactors
             _filepath = filepath;
         }
 
-        public void Report(DateTime today, IEnumerable<Product> expiredProducts)
+        public void Report(DateTime today, Product expiredProduct)
         {
-            using var writer = new StreamWriter(_filepath);
-
-            writer.WriteLine($"[{today}] - {Quantity(expiredProducts, "product")} expired.");
-
-            foreach (Product product in expiredProducts)
-                writer.WriteLine(product);
-
-            writer.WriteLine();
-        }
-
-        private static string Quantity<T>(IEnumerable<T> enumerable, string noun)
-        {
-            int count = enumerable.Count();
-
-            return $"{(count > 0 ? count.ToString() : "No")} {noun}{(count == 1 ? string.Empty : "s")}";
+            using var writer = new StreamWriter(_filepath, true);
+            writer.WriteLine($"{today} | {expiredProduct} expired");
         }
     }
 }

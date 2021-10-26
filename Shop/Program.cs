@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using Shop.Interactors;
 using Shop.Models;
@@ -12,31 +13,70 @@ namespace Shop
     {
         private static void Main(string[] args)
         {
-            StorageMatcherDemo();
+            
+        }
+
+        private static void Demo()
+        {
+            Storage first = CreateStorageFromFileWithLoggingInvalidLines();
+            first.View();
+            
+            Storage second = CreateStorageFromFileWithPromptingToReplaceInvalidLines();
+            Console.WriteLine();
+            second.View();
+        }
+
+        private static Storage CreateStorageFromFileWithLoggingInvalidLines()
+        {
+            Console.WriteLine("Enter input file: ");
+            string inputFilepath = Console.ReadLine();
+            Console.WriteLine("Enter file to report invalid lines to: ");
+            string logFilepath = Console.ReadLine();
+            using var writer = new StreamWriter(logFilepath);
+            return CreateStorageFromFile(inputFilepath,
+                                         (_, lineIndex, exception) =>
+                                         {
+                                             writer.WriteLine(
+                                                 $"{DateTime.Now} | line {lineIndex} | {exception.Message}");
+                                         });
+        }
+
+        private static Storage CreateStorageFromFileWithPromptingToReplaceInvalidLines()
+        {
+            Console.WriteLine("Enter input file: ");
+            string inputFilepath = Console.ReadLine();
+            return CreateStorageFromFile(inputFilepath,
+                                         (storage, lineIndex, exception) =>
+                                         {
+                                             Console.WriteLine($"Error at line {lineIndex}: {exception.Message}");
+                                             Console.WriteLine("Would you like to enter a product manually? (yes/no)");
+                                             string response = Console.ReadLine();
+                                             if (response == "yes")
+                                                 storage.Add(ProductCreationPrompter.Prompt());
+                                         });
         }
 
         private static void StorageMatcherDemo()
         {
-            Storage lhs = CreateStorage();
-            Storage rhs = CreateStorage();
+            Storage lhs = CreateStorageViaConsole();
+            Storage rhs = CreateStorageViaConsole();
 
             Console.WriteLine("Common products:");
             foreach (Product product in StorageMatcher.IntersectProducts(lhs, rhs))
                 Console.WriteLine(product);
-            
+
             Console.WriteLine("\nProducts in the first, but not in the second:");
             foreach (Product product in StorageMatcher.Except(lhs, rhs))
                 Console.WriteLine(product);
-            
+
             Console.WriteLine("\nDifferent products:");
             foreach (Product product in StorageMatcher.SymmetricExcept(lhs, rhs))
                 Console.WriteLine(product);
-            
         }
 
         private static void SortingDemo()
         {
-            Storage storage = CreateStorage();
+            Storage storage = CreateStorageViaConsole();
 
             PrintStorageSorted(storage,
                                (lhs, rhs) => lhs.Price.CompareTo(rhs.Price),
@@ -51,7 +91,18 @@ namespace Shop
                                "weight");
         }
 
-        private static Storage CreateStorage()
+        private static Storage CreateStorageFromFile(string filepath,
+                                                     Action<Storage, int, Exception> onLineFailed)
+        {
+            var today = DateTime.Parse(Console.ReadLine());
+            var deserializer = new ProductsDeserializer();
+            var storage = new Storage(today);
+            deserializer.LineFailed += (lineIndex, exception) => onLineFailed(storage, lineIndex, exception);
+            storage.Add(deserializer.DeserializeFile(filepath));
+            return storage;
+        }
+
+        private static Storage CreateStorageViaConsole()
         {
             Console.WriteLine("Enter a file to write reports about expired products to:");
             string filepath = Console.ReadLine();
@@ -60,8 +111,13 @@ namespace Shop
             Console.WriteLine("Enter the starting date for the storage:");
             var today = DateTime.Parse(Console.ReadLine());
 
-            var storage = new Storage(today, reporter);
+            var storage = new Storage(today);
             storage.Add(ProductCreationPrompter.StartDialog());
+            storage.ProductExpired += product =>
+            {
+                storage.Remove(product);
+                reporter.Report(storage.Today, product);
+            };
 
             return storage;
         }

@@ -8,12 +8,12 @@ using Task.Data;
 
 namespace Shop.Interactors
 {
-    public static class ProductCreator
+    public static class ProductParser
     {
         private static readonly Dictionary<ProductKind,
             Func<string[], Product>> ProductFactories;
 
-        static ProductCreator()
+        static ProductParser()
         {
             ProductFactories
                 = new Dictionary<ProductKind, Func<string[], Product>>();
@@ -63,8 +63,9 @@ namespace Shop.Interactors
             ProductFactories[productKind] = factory;
         }
 
-        public static Product Create(string[] options)
+        public static Product Parse(string input)
         {
+            string[] options = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             if (!Enum.TryParse(options[0].Replace('-', '_'),
                                true,
                                out ProductKind productKind))

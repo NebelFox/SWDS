@@ -52,9 +52,9 @@ namespace Task.Interactors
             }
         }
 
-        private static Product Prompt()
+        public static Product Prompt()
         {
-            string? input = Console.ReadLine();
+            string input = Console.ReadLine();
             while (input == null)
             {
                 Console.WriteLine("Empty input. Try again");
@@ -69,13 +69,8 @@ namespace Task.Interactors
                 ShowHelp();
                 return Prompt();
             default:
-                return Create(input);
+                return ProductParser.Parse(input);
             }
-        }
-
-        private static Product Create(string options)
-        {
-            return ProductCreator.Create(options.Split());
         }
     }
 }
