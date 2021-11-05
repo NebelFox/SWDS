@@ -3,7 +3,7 @@ Software Development School Repository.
 For each task a separate project is created.  
 Each project root folder contains README.md with number and description of the tast it's for.
 
-[shop-design]: <https://lucid.app/documents/embeddedchart/68e8c79f-d42d-4145-ba0c-791213b20424>
+[shop-design]: <https://lucid.app/lucidchart/68e8c79f-d42d-4145-ba0c-791213b20424/edit?invitationId=inv_97b34d12-42fd-44ff-a5cd-07212437fdae>
 [shop]: <https://github.com/NebelFox/SWDS/tree/master/Shop>
 [magic-square]: <https://github.com/NebelFox/SWDS/tree/master/MagicSquare>
 [brackets-depth]: <https://github.com/NebelFox/SWDS/tree/master/BracketsDepth>
