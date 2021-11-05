@@ -3,7 +3,8 @@ Software Development School Repository.
 For each task a separate project is created.  
 Each project root folder contains README.md with number and description of the tast it's for.
 
-[shop-design]: <https://lucid.app/lucidchart/68e8c79f-d42d-4145-ba0c-791213b20424/edit?invitationId=inv_97b34d12-42fd-44ff-a5cd-07212437fdae>
+[shop-design-image]: <https://lucid.app/publicSegments/view/1c389e63-004a-4b66-b253-a781a07fc4e1/image.png>
+[shop-design-pdf]: <https://lucid.app/publicSegments/view/bf7cef97-a3f6-4ba8-bab1-1be54d8773d8>
 [shop]: <https://github.com/NebelFox/SWDS/tree/master/Shop>
 [magic-square]: <https://github.com/NebelFox/SWDS/tree/master/MagicSquare>
 [brackets-depth]: <https://github.com/NebelFox/SWDS/tree/master/BracketsDepth>
@@ -16,7 +17,7 @@ Each project root folder contains README.md with number and description of the t
 [ele-tracker]: <https://github.com/NebelFox/SWDS/tree/master/EleTracker>
 
 ### Navigation:
-- Task 10: [Diagram][shop-design]
+- Task 10: Diagram ([PDF][shop-design-pdf]) ([Image][shop-design-image])
 - Task 9: [Shop][shop] ([commit](https://github.com/NebelFox/SWDS/commit/9e11d17e178e01fd6e2cf6ab27b77e84425304aa))
 - Task 8:
   - 8.1 - [Shop][shop]
