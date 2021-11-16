@@ -10,7 +10,7 @@ namespace Shop.Models
     public class Storage : IEnumerable<Product>
     {//делегат може бути зовнішнім
         public delegate void OnProductExpired(Product product);
-
+//Чому при створенні екземпляру не підписались на нього. І чому подія тільки одна.
         public event OnProductExpired ProductExpired;
 
         private readonly List<Product> _products;
