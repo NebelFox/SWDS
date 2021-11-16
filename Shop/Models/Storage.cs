@@ -8,7 +8,7 @@ using Shop.Models.Products;
 namespace Shop.Models
 {
     public class Storage : IEnumerable<Product>
-    {
+    {//делегат може бути зовнішнім
         public delegate void OnProductExpired(Product product);
 
         public event OnProductExpired ProductExpired;
