@@ -6,8 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Models" />
-        <Folder Include="Properties" />
+      <Reference Include="Verbox, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <HintPath>..\..\Verbox\src\bin\Debug\net5.0\Verbox.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>
